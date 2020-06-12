@@ -13,10 +13,10 @@
           <a routerLink="/register" class="nav-link">Register</a>
         </li>
         <li *ngIf="loggedIn" class="nav-item">
-          <a class="nav-link">Welcome {{ currentUser?.username | titlecase }}</a>
+          <a class="nav-link" style="color:#fff;">Welcome {{ currentUser?.username | titlecase }}</a>
         </li>
         <li *ngIf="loggedIn" class="nav-item">
-          <a (click)="logout()" class="nav-link">Logout</a>
+          <a (click)="logout()" class="nav-link" style="color:#fff;">Logout</a>
         </li>
       </ul>
     </div>

@@ -1,3 +1,43 @@
-<p class="text-center mt-5 mb-5 p-3">
-  home works!
-</p>
+<h3 class="text-center mt-5 mb-5 p-3">
+  Welcome To SG Bank
+</h3>
+
+<h3>Your Total Balance is {{ currentUser?.balance | currency: 'EUR'}} </h3>
+
+<div class="container mt-5">
+  <div class="row">
+
+    <div class="col-sm-4">
+      <div class="card text-center cardBody">
+        <div class="card-body">
+          <h4 class="card-title">Make Deposit</h4>
+          <h2 style="color:green;">€</h2>
+          <a routerLink="/dashboard/deposit" class="btn btn-primary mt-3">Deposit's Page</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="card text-center cardBody">
+        <div class="card-body">
+          <h4 class="card-title">Withdraw Money</h4>
+          <h2 style="color:red;">€</h2>
+          <a routerLink="/dashboard/withdrawal" class="btn btn-primary mt-3">Withdrawal's Page</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="card text-center cardBody">
+        <div class="card-body">
+          <h4 class="card-title">History</h4>
+          <h2>
+            <mat-icon color="primary" style="font-size: 32px;">history</mat-icon>
+          </h2>
+          <a routerLink="/dashboard/history" class="btn btn-primary mt-3">History Page</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
