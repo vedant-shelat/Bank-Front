@@ -1,0 +1,12 @@
+<div fxLayout="row" matDialogTitle class="mat-accent m-2">
+  <h2 mat-dialog-title>{{title}}</h2>
+</div>
+<mat-dialog-content class="mb-3">
+  {{text}}
+</mat-dialog-content>
+<mat-dialog-actions fxLayoutAlign="end center">
+  <button *ngIf="!btn" mat-flat-button color="primary" style="margin-right: 16px;" (click)="close('yes')">Yes</button>
+  <button *ngIf="!btn" mat-flat-button color="warn" (click)="close('no')">No</button>
+
+  <button *ngIf="btn" mat-flat-button color="primary" style="margin-right: 16px;" (click)="close('yes')">Ok</button>
+</mat-dialog-actions>

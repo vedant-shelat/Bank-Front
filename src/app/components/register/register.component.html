@@ -1,0 +1,74 @@
+<div class="row">
+  <div class="col-md-6 mx-auto">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="text-center p-4">
+          <span class="text-primary">Register</span>
+        </h4>
+        <form (ngsubmit)="register()" [formGroup]="registerForm" novalidate>
+          <div *ngIf="signupSuccessMsg" class="alert alert-success" role="alert">
+            You have been registerd succesfully, please sign in!
+          </div>
+          <div *ngIf="emailExistsMsg" class="alert alert-danger" role="alert">
+            Email address already exists !
+          </div>
+          <div *ngIf="usernameExistsMsg" class="alert alert-danger" role="alert">
+            Username already exists !
+          </div>
+          <mat-form-field class="pb-2">
+            <input formControlName="firstname" matInput placeholder="FirstName" [(ngModel)]="user.firstname" required>
+            <mat-error *ngIf="getFormControls['firstname'].errors?.required">
+              Required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="pb-2">
+            <input formControlName="lastname" matInput placeholder="LastName" [(ngModel)]="user.lastname" required>
+            <mat-error *ngIf="getFormControls['lastname'].errors?.required">
+              Required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="pb-2">
+            <input formControlName="username" matInput placeholder="Username" [(ngModel)]="user.username" required>
+            <mat-error *ngIf="getFormControls['username'].errors?.required">
+              Required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="pb-2">
+            <input type="text" formControlName="email" matInput placeholder="Email" [(ngModel)]="user.email" required>
+            <mat-error *ngIf="getFormControls['email'].errors?.required">
+              Required
+            </mat-error>
+            <mat-error *ngIf="!getFormControls['email'].errors?.required && getFormControls['email'].errors?.pattern">
+              Enter a valid email
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="pb-2">
+            <input fxLayout="row" type="password" matInput formControlName="password" placeholder="Password"
+              [(ngModel)]="user.password" required>
+            <mat-error *ngIf="getFormControls['password'].errors?.required">
+              Required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input fxLayout="row" type="password" matInput formControlName="confirmPassword"
+              placeholder="Confirm Password" [(ngModel)]="user.confirmPassword" required>
+          </mat-form-field>
+          <span class="mb-3 pwd-error" *ngIf="user.password != user.confirmPassword">
+            Password did'nt match
+          </span>
+
+          <div fxLayout="row">
+            <button mat-flat-button color="primary" type="submit" class="mb-3"
+              [disabled]="registerForm.invalid || loading || user.password != user.confirmPassword">
+              Register
+              <mat-icon *ngIf="loading">
+                <mat-spinner diameter="20"></mat-spinner>
+              </mat-icon>
+            </button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

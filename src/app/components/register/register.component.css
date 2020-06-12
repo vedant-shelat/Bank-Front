@@ -1,0 +1,10 @@
+mat-form-field {
+  width: 100%;
+}
+
+.pwd-error {
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  color: red;
+  display: block;
+  font-size: 12px;
+}

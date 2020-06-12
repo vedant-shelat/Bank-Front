@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-md-6 mx-auto">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="text-center p-4">
+          <span class="text-primary">Welcome To SG Bank Login</span>
+        </h4>
+        <form (ngsubmit)="login()" [formGroup]="loginForm" novalidate>
+          <div *ngIf="badCredentialsMsg" class="alert alert-danger m-3" role="alert">
+            Bad Credentials !
+          </div>
+          <mat-form-field class="pb-3">
+            <input formControlName="username" matInput placeholder="Username" [(ngModel)]="user.username" required>
+            <mat-error *ngIf="getFormControls['username'].errors?.required">
+              Required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="pb-3">
+            <input fxFlex="80" fxLayout="row" [type]="hide ? 'password':'text'" matInput formControlName="password"
+              placeholder="Password" [(ngModel)]="user.password" required>
+            <mat-icon fxFlex="20" fxLayoutAlign="end center" style="cursor:pointer;" matSuffix (click)="hide = !hide">
+              {{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+            <mat-error *ngIf="getFormControls['password'].errors?.required">
+              Required
+            </mat-error>
+          </mat-form-field>
+
+          <div fxLayout="row">
+            <button mat-flat-button color="primary" type="submit" class="mb-3" [disabled]="loginForm.invalid">
+              Login
+              <mat-icon *ngIf="loading">
+                <mat-spinner diameter="20"></mat-spinner>
+              </mat-icon>
+            </button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
