@@ -5,7 +5,7 @@
         <h4 class="text-center p-4">
           <span class="text-primary">Register With SG Bank</span>
         </h4>
-        <form (ngsubmit)="register()" [formGroup]="registerForm" novalidate>
+        <form (ngSubmit)="register()" #registerFormDirective="ngForm" [formGroup]="registerForm" novalidate>
           <div *ngIf="signupSuccessMsg" class="alert alert-success" role="alert">
             You have been registerd succesfully, please sign in!
           </div>

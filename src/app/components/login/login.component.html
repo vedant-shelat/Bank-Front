@@ -5,7 +5,7 @@
         <h4 class="text-center p-4">
           <span class="text-primary">Welcome To SG Bank Login</span>
         </h4>
-        <form (ngsubmit)="login()" [formGroup]="loginForm" novalidate>
+        <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate>
           <div *ngIf="badCredentialsMsg" class="alert alert-danger m-3" role="alert">
             Bad Credentials !
           </div>
@@ -29,6 +29,43 @@
             <button mat-flat-button color="primary" type="submit" class="mb-3" [disabled]="loginForm.invalid">
               Login
               <mat-icon *ngIf="loading">
+                <mat-spinner diameter="20"></mat-spinner>
+              </mat-icon>
+            </button>
+          </div>
+          <div style="text-align:center;" class="mt-3">
+            <button class="mb-3" fxLayoutAlign="center" (click)="showForgetPwdText =! showForgetPwdText"
+              mat-stroked-button color="warn" type="button">Forgot
+              Password ?
+            </button>
+          </div>
+        </form>
+
+        <form *ngIf="showForgetPwdText" (ngSubmit)="passwordForgot()" #pwdFormDirective="ngForm"
+          [formGroup]="pwdForgotForm" novalidate>
+          <div *ngIf="emailDidntExistsMsg" class="alert alert-danger" role="alert">
+            Email address does not exists !
+          </div>
+          <div *ngIf="emailSentMsg" class="alert alert-success" role="alert">
+            An email has been sent
+          </div>
+          <mat-form-field class="pb-2">
+            <input type="text" formControlName="email" matInput placeholder="Email" [(ngModel)]="forgotPwdEmail"
+              required>
+            <mat-error *ngIf="getPwdFormControls['email'].errors?.required">
+              Required
+            </mat-error>
+            <mat-error
+              *ngIf="!getPwdFormControls['email'].errors?.required && getPwdFormControls['email'].errors?.pattern">
+              Enter a valid email
+            </mat-error>
+          </mat-form-field>
+
+          <div fxLayout="row">
+            <button mat-flat-button color="primary" type="submit" class="mb-3"
+              [disabled]="pwdForgotForm.invalid || pwdForgotLoading">
+              Send
+              <mat-icon *ngIf="pwdForgotLoading">
                 <mat-spinner diameter="20"></mat-spinner>
               </mat-icon>
             </button>

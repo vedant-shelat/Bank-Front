@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
   FormControl,
-  Validators
+  Validators,
+  NgForm
 } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 
@@ -19,6 +20,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   user: any = {};
   loading;
+  @ViewChild('registerFormDirective') private registerFormDirective: NgForm;
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService
@@ -51,6 +53,7 @@ export class RegisterComponent implements OnInit {
         this.loading = false;
         this.signupSuccessMsg = true;
         this.registerForm.reset();
+        this.registerFormDirective.resetForm();
       },
       err => {
         this.loading = false;

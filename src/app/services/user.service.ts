@@ -31,4 +31,12 @@ export class UserService {
   logout() {
     return this.http.post(AppConstants.public_url + 'user/disconnect', null);
   }
+
+  forgotpassword(email) {
+    return this.http.post(
+      AppConstants.public_url + 'user/forgotPassword',
+      email,
+      { responseType: 'text' }
+    );
+  }
 }
