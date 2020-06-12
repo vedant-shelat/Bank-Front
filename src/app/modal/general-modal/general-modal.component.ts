@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-general-modal',
@@ -13,8 +12,7 @@ export class GeneralModalComponent implements OnInit {
   btn;
   constructor(
     private dialogRef: MatDialogRef<GeneralModalComponent>,
-    @Inject(MAT_DIALOG_DATA) private data,
-    private userService: UserService
+    @Inject(MAT_DIALOG_DATA) private data
   ) {}
 
   ngOnInit() {

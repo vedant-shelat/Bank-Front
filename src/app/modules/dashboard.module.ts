@@ -26,6 +26,9 @@ import { AvatarModule } from 'ngx-avatar';
 import { RouterModule } from '@angular/router';
 import { DashboardComponent } from '../components/dashboard/dashboard.component';
 import { GeneralModalComponent } from '../modal/general-modal/general-modal.component';
+import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+
 @NgModule({
   entryComponents: [GeneralModalComponent],
   declarations: [DashboardComponent, GeneralModalComponent],
@@ -52,7 +55,9 @@ import { GeneralModalComponent } from '../modal/general-modal/general-modal.comp
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatTooltipModule
+    MatTooltipModule,
+    CommonModule,
+    BrowserModule
   ],
   exports: [DashboardComponent]
 })
