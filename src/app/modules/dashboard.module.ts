@@ -28,10 +28,26 @@ import { DashboardComponent } from '../components/dashboard/dashboard.component'
 import { GeneralModalComponent } from '../modal/general-modal/general-modal.component';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import { DashboardSidebarComponent } from '../components/dashboard-sidebar/dashboard-sidebar.component';
+import { HomeComponent } from '../components/home/home.component';
+import { DepositComponent } from '../components/deposit/deposit.component';
+import { WithdrawalComponent } from '../components/withdrawal/withdrawal.component';
+import { HistoryComponent } from '../components/history/history.component';
+import { ProfileComponent } from '../components/profile/profile.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   entryComponents: [GeneralModalComponent],
-  declarations: [DashboardComponent, GeneralModalComponent],
+  declarations: [
+    DashboardComponent,
+    GeneralModalComponent,
+    DashboardSidebarComponent,
+    HomeComponent,
+    DepositComponent,
+    WithdrawalComponent,
+    HistoryComponent,
+    ProfileComponent
+  ],
   imports: [
     FlexLayoutModule,
     AvatarModule,
@@ -57,8 +73,19 @@ import { BrowserModule } from '@angular/platform-browser';
     MatNativeDateModule,
     MatTooltipModule,
     CommonModule,
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  exports: [DashboardComponent]
+  exports: [
+    DashboardComponent,
+    GeneralModalComponent,
+    DashboardSidebarComponent,
+    HomeComponent,
+    DepositComponent,
+    WithdrawalComponent,
+    HistoryComponent,
+    ProfileComponent
+  ]
 })
 export class DashboardModule {}

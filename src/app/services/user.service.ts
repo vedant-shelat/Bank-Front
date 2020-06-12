@@ -39,4 +39,11 @@ export class UserService {
       { responseType: 'text' }
     );
   }
+
+  updateUserInfo(user) {
+    return this.http.post(
+      AppConstants.public_url + 'user/updateUserInfo',
+      user
+    );
+  }
 }

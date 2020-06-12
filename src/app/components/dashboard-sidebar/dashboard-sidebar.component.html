@@ -1,0 +1,42 @@
+<mat-nav-list class="mt-5">
+  <div class="profile-card">
+    <div class="header">
+      <h2>{{ currentUser?.username | titlecase}}</h2>
+    </div>
+
+    <ngx-avatar [name]="fullname" size="100"></ngx-avatar>
+  </div>
+
+  <mat-divider class="divider"></mat-divider>
+
+  <a class="text-white" mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"
+    routerLink="/dashboard">
+    <mat-icon>home</mat-icon>
+    Home
+  </a>
+
+  <a class="text-white" mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"
+    routerLink="/dashboard/deposit">
+    <mat-icon>attach_money</mat-icon>
+    Deposit
+  </a>
+
+  <a class="text-white" mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"
+    routerLink="/dashboard/withdrawal">
+    <mat-icon>credit_card</mat-icon>
+    Withdrawal
+  </a>
+
+  <a class="text-white" mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"
+    routerLink="/dashboard/history">
+    <mat-icon>history</mat-icon>
+    History
+  </a>
+
+  <a class="text-white" mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"
+    routerLink="/dashboard/profile">
+    <mat-icon>account_circle</mat-icon>
+    Profile
+  </a>
+
+</mat-nav-list>

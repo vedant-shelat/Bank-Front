@@ -1,3 +1,8 @@
-<p>
-  dashboard works!
-</p>
+<mat-drawer-container>
+  <mat-drawer class="bg-dark text-white" mode="side" opened>
+    <app-dashboard-sidebar></app-dashboard-sidebar>
+  </mat-drawer>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
