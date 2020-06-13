@@ -7,10 +7,10 @@
     <div class="collapse navbar-collapse" id="navbarMain">
       <ul class="navbar-nav ml-auto">
         <li *ngIf="!loggedIn" class="nav-item">
-          <a routerLink="/login" class="nav-link">Login</a>
+          <a routerLink="/login" style="color:#fff;" class="nav-link">Login</a>
         </li>
         <li *ngIf="!loggedIn" class="nav-item">
-          <a routerLink="/register" class="nav-link">Register</a>
+          <a routerLink="/register" style="color:#fff;" class="nav-link">Register</a>
         </li>
         <li *ngIf="loggedIn" class="nav-item">
           <a class="nav-link" style="color:#fff;">Welcome {{ currentUser?.username | titlecase }}</a>
