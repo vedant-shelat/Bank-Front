@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit {
   profileupdateSuccessMsg;
   currentUser: any = {};
   userForm: FormGroup;
+  loading;
   @ViewChild('userFormDirective') private userFormDirective: NgForm;
   constructor(
     private userService: UserService,
@@ -43,12 +44,19 @@ export class ProfileComponent implements OnInit {
   }
 
   updateUserInfo() {
-    this.userService.updateUserInfo(this.currentUser).subscribe((res: any) => {
-      this.profileupdateSuccessMsg = true;
-      this.userForm.reset();
-      this.userFormDirective.resetForm();
-      this.getCurrentUser();
-    });
+    this.loading = true;
+    this.userService.updateUserInfo(this.currentUser).subscribe(
+      (res: any) => {
+        this.profileupdateSuccessMsg = true;
+        this.loading = false;
+        this.userForm.reset();
+        this.userFormDirective.resetForm();
+        this.getCurrentUser();
+      },
+      err => {
+        this.loading = false;
+      }
+    );
     setTimeout(() => {
       this.profileupdateSuccessMsg = false;
     }, 4000);

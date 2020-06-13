@@ -26,7 +26,10 @@
   </div>
 
   <div fxLayout="row" fxLayoutAlign="end center">
-    <button mat-flat-button color="primary" type="submit" [disabled]="userForm.invalid">Save
+    <button mat-flat-button color="primary" type="submit" [disabled]="userForm.invalid || loading">Save
+      <mat-icon *ngIf="loading">
+        <mat-spinner diameter="20"></mat-spinner>
+      </mat-icon>
     </button>
   </div>
 

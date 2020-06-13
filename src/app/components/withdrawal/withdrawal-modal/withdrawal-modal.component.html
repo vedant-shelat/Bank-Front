@@ -30,7 +30,9 @@
       <button mat-flat-button color="warn" mat-dialog-close type="button" class="mr-2">Cancel</button>
       <button mat-flat-button color="primary" type="submit" [disabled]="withdrawalForm.invalid || loading">Withdraw
         Money
-        <mat-spinner [diameter]="20" *ngIf="loading"></mat-spinner>
+        <mat-icon *ngIf="loading">
+          <mat-spinner diameter="20"></mat-spinner>
+        </mat-icon>
       </button>
     </mat-dialog-actions>
   </div>
