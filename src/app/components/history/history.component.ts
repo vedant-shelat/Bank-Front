@@ -16,7 +16,7 @@ export class HistoryComponent implements OnInit {
   histories = new MatTableDataSource([]);
   pageEvent: PageEvent = {
     pageIndex: 0,
-    pageSize: 5,
+    pageSize: 10,
     length: 0
   };
   loading;
@@ -42,7 +42,6 @@ export class HistoryComponent implements OnInit {
       size: this.pageEvent.pageSize
     };
     this.historyService.getAllUserHistory(pager).subscribe((res: any) => {
-      console.log(res);
       this.totalHistories = res.length;
       this.histories = new MatTableDataSource(res.histories);
     });

@@ -19,7 +19,7 @@ export class WithdrawalComponent implements OnInit {
   displayedColumns = ['date', 'amount'];
   pageEvent: PageEvent = {
     pageIndex: 0,
-    pageSize: 5,
+    pageSize: 10,
     length: 0
   };
   constructor(
@@ -39,7 +39,6 @@ export class WithdrawalComponent implements OnInit {
       size: this.pageEvent.pageSize
     };
     this.withdrawalService.getAllWithdrawals(pager).subscribe((res: any) => {
-      console.log(res);
       this.totalWithdrawns = res.length;
       this.withdrawals = new MatTableDataSource(res.withdrawals);
     });
@@ -53,7 +52,7 @@ export class WithdrawalComponent implements OnInit {
 
   withdraw() {
     const config = _.cloneDeep(AppConstants.DIALOG_CONFIG.AVERAGE);
-    config.data = {};
+    config.data = { balance: this.currentUserBalance };
     let dialogRef = this.dialog.open(WithdrawalModalComponent, config);
     dialogRef.afterClosed().subscribe(res => {
       if (res === 'withdrawal saved') {

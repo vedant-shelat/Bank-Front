@@ -16,6 +16,9 @@ export class WithdrawalModalComponent implements OnInit {
   loading;
   withdrawalForm: FormGroup;
   withdraw: any = {};
+  invalidAmount;
+  currentUserBalance;
+  cannotWithdrawMsg;
   constructor(
     @Inject(MAT_DIALOG_DATA) private data,
     private formBuilder: FormBuilder,
@@ -24,6 +27,9 @@ export class WithdrawalModalComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    if (this.data) {
+      this.currentUserBalance = this.data.balance;
+    }
     this.withdrawalForm = this.formBuilder.group({
       withdrawal: new FormControl('', [Validators.required])
     });
@@ -34,10 +40,29 @@ export class WithdrawalModalComponent implements OnInit {
   }
 
   saveWithdrawal() {
-    this.loading = true;
-    this.withdrawalService.saveWithdrawal(this.withdraw).subscribe(res => {
-      this.dialogRef.close('withdrawal saved');
-      this.loading = false;
-    });
+    if (this.withdraw.amount > 0) {
+      this.checkWithdrawalAmount();
+    } else {
+      this.invalidAmount = true;
+    }
+    setTimeout(() => {
+      this.invalidAmount = false;
+    }, 3500);
+  }
+
+  checkWithdrawalAmount() {
+    let withdarawalBalance = this.withdraw.amount;
+    if (this.currentUserBalance - withdarawalBalance >= 0) {
+      this.loading = true;
+      this.withdrawalService.saveWithdrawal(this.withdraw).subscribe(res => {
+        this.dialogRef.close('withdrawal saved');
+        this.loading = false;
+      });
+    } else {
+      this.cannotWithdrawMsg = true;
+    }
+    setTimeout(() => {
+      this.cannotWithdrawMsg = false;
+    }, 3500);
   }
 }

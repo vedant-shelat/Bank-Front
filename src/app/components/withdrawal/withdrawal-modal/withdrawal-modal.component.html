@@ -5,10 +5,20 @@
     </div>
 
     <mat-dialog-content fxLayout="column" class="mr-3">
+      <div *ngIf="cannotWithdrawMsg" class="alert alert-danger" role="alert">
+        You cannot withdraw {{ withdraw.amount | currency:'EUR' }}, because your total balance is
+        {{ currentUserBalance | currency: 'EUR' }}
+      </div>
+
+      <div *ngIf="invalidAmount" class="alert alert-danger" role="alert">
+        Please enter an amount greater then 0.
+      </div>
+
       <div fxLayout="column">
-        <mat-form-field fxFlex="100">
+        <mat-form-field fxFlex="100" class="mt-3">
           <input formControlName="withdrawal" type="number" matInput
-            placeholder="Enter amount to be withdrawn from your account." [(ngModel)]="withdraw.amount" required>
+            placeholder="Enter amount to be withdrawn from your account. Ex: 10 or 20.50" [(ngModel)]="withdraw.amount"
+            required>
           <mat-error *ngIf="getFormControls['withdrawal'].errors?.required">
             Required
           </mat-error>

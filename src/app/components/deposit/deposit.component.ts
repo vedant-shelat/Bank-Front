@@ -20,7 +20,7 @@ export class DepositComponent implements OnInit {
   displayedColumns = ['date', 'amount'];
   pageEvent: PageEvent = {
     pageIndex: 0,
-    pageSize: 5,
+    pageSize: 10,
     length: 0
   };
   constructor(
@@ -41,7 +41,6 @@ export class DepositComponent implements OnInit {
       size: this.pageEvent.pageSize
     };
     this.depositService.getAllDeposits(pager).subscribe((res: any) => {
-      console.log(res);
       this.totalDeposits = res.length;
       this.deposits = new MatTableDataSource(res.deposits);
     });

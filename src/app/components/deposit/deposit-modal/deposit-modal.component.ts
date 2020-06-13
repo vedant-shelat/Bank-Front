@@ -16,6 +16,7 @@ export class DepositModalComponent implements OnInit {
   loading;
   depositForm: FormGroup;
   deposit: any = {};
+  invalidAmount;
   constructor(
     @Inject(MAT_DIALOG_DATA) private data,
     private formBuilder: FormBuilder,
@@ -34,10 +35,21 @@ export class DepositModalComponent implements OnInit {
   }
 
   saveDeposit() {
-    this.loading = true;
-    this.depositService.saveDeposit(this.deposit).subscribe(res => {
-      this.dialogRef.close('deposit saved');
-      this.loading = false;
-    });
+    this.checkAmount();
+  }
+
+  checkAmount() {
+    if (this.deposit.amount > 0) {
+      this.loading = true;
+      this.depositService.saveDeposit(this.deposit).subscribe(res => {
+        this.dialogRef.close('deposit saved');
+        this.loading = false;
+      });
+    } else {
+      this.invalidAmount = true;
+    }
+    setTimeout(() => {
+      this.invalidAmount = false;
+    }, 3500);
   }
 }

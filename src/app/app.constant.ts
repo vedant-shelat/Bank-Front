@@ -22,7 +22,8 @@ export class AppConstants {
     }
   };
 
-  public static public_url = 'http://localhost:5000/';
+  //public static public_url = 'http://localhost:5000/';
 
-  //public static public_url ='';
+  public static public_url =
+    'http://bank-env.eba-trhjyp2w.eu-west-3.elasticbeanstalk.com/';
 }
