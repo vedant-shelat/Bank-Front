@@ -22,15 +22,24 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.userService.currentUserInfo.subscribe(res => {
-      this.getCurrentUser();
+      if (res === null) {
+        this.loggedIn = false;
+      } else {
+        this.getCurrentUser();
+      }
     });
   }
 
   getCurrentUser() {
-    this.userService.getCurrentUser().subscribe(res => {
-      this.loggedIn = true;
-      this.currentUser = res;
-    });
+    this.userService.getCurrentUser().subscribe(
+      res => {
+        this.loggedIn = true;
+        this.currentUser = res;
+      },
+      err => {
+        this.loggedIn = false;
+      }
+    );
   }
 
   logout() {

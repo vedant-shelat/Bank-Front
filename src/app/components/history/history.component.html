@@ -1,3 +1,53 @@
-<p class="text-center mt-5 mb-5 p-3">
-  history works!
-</p>
+<div fxLayout="column">
+  <div class="h1 mt-5">Operation History</div>
+</div>
+
+<div class="mt-3 mb-4">
+  <button type="button" [disabled]="totalHistories == 0 || loading" mat-flat-button color="primary"
+    (click)="downloadStatement()">Print
+    Statement</button>
+</div>
+
+<h3 class="mb-5 mt-5">Total Available Balance is {{ currentUserBalance | currency: 'EUR' }}</h3>
+
+<div class="m-3">
+
+  <div *ngIf="downloadedMsg" class="alert alert-success" role="alert">
+    Statement downloaded successfully
+  </div>
+
+  <table *ngIf="totalHistories != 0" mat-table [dataSource]="histories" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>Date</th>
+      <td mat-cell *matCellDef="let element">{{ element.creationDate | date: 'dd/MM/yyyy, HH:mm' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="operationType">
+      <th mat-header-cell *matHeaderCellDef>Operation Type</th>
+      <td mat-cell *matCellDef="let element">
+        <span style="font-weight: bolder"
+          [ngClass]="{textColorGreen: element.operation == 'DEPOSIT', textColorRed: element.operation == 'WITHDRAWAL'}">
+          {{ element.operation }}
+        </span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef>Amount</th>
+      <td mat-cell *matCellDef="let element">
+        <span style="font-weight: bolder;color:green;" *ngIf="element.operation == 'DEPOSIT'"> + </span>
+        <span style="font-weight: bolder;color:red;" *ngIf="element.operation == 'WITHDRAWAL'"> - </span>
+        {{ element.amount | currency:'EUR'}}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator *ngIf="totalHistories != 0" (page)="pageChanged($event)" [pageSize]="pageEvent.pageSize"
+    [length]="totalHistories" [pageSizeOptions]="[10,15,20,50]" [showFirstLastButtons]="true"></mat-paginator>
+
+  <div *ngIf="totalHistories == 0" style="font-weight: bold;" class="text-center">You have no history operations, make a
+    deposit or withdrawal to see an history.</div>
+</div>

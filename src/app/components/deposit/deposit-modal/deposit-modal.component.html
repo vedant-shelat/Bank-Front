@@ -1,0 +1,26 @@
+<form (ngSubmit)="saveDeposit()" [formGroup]="depositForm" novalidate>
+  <div class="dialog-content-wrapper">
+    <div matDialogTitle class="mat-accent m-0">
+      <h4>Make Deposit</h4>
+    </div>
+
+    <mat-dialog-content fxLayout="column" class="mr-3">
+      <div fxLayout="column">
+        <mat-form-field fxFlex="100">
+          <input formControlName="deposit" type="number" matInput
+            placeholder="Enter amount to be deposited in your account." [(ngModel)]="deposit.amount" required>
+          <mat-error *ngIf="getFormControls['deposit'].errors?.required">
+            Required
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions fxLayout="row" fxLayoutAlign="end center">
+      <button mat-flat-button color="warn" mat-dialog-close type="button" class="mr-2">Cancel</button>
+      <button mat-flat-button color="primary" type="submit" [disabled]="depositForm.invalid || loading">Deposit
+        <mat-spinner [diameter]="20" *ngIf="loading"></mat-spinner>
+      </button>
+    </mat-dialog-actions>
+  </div>
+</form>

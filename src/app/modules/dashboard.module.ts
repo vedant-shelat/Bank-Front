@@ -35,9 +35,15 @@ import { WithdrawalComponent } from '../components/withdrawal/withdrawal.compone
 import { HistoryComponent } from '../components/history/history.component';
 import { ProfileComponent } from '../components/profile/profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DepositModalComponent } from '../components/deposit/deposit-modal/deposit-modal.component';
+import { WithdrawalModalComponent } from '../components/withdrawal/withdrawal-modal/withdrawal-modal.component';
 
 @NgModule({
-  entryComponents: [GeneralModalComponent],
+  entryComponents: [
+    GeneralModalComponent,
+    DepositModalComponent,
+    WithdrawalModalComponent
+  ],
   declarations: [
     DashboardComponent,
     GeneralModalComponent,
@@ -46,7 +52,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     DepositComponent,
     WithdrawalComponent,
     HistoryComponent,
-    ProfileComponent
+    ProfileComponent,
+    DepositModalComponent,
+    WithdrawalModalComponent
   ],
   imports: [
     FlexLayoutModule,
@@ -85,7 +93,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     DepositComponent,
     WithdrawalComponent,
     HistoryComponent,
-    ProfileComponent
+    ProfileComponent,
+    DepositModalComponent,
+    WithdrawalModalComponent
   ]
 })
 export class DashboardModule {}

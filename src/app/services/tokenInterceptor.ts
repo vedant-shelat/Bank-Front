@@ -11,12 +11,17 @@ import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { GeneralModalComponent } from '../modal/general-modal/general-modal.component';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenInterceptor implements HttpInterceptor {
-  constructor(private dialog: MatDialog, private router: Router) {}
+  constructor(
+    private dialog: MatDialog,
+    private router: Router,
+    private userService: UserService
+  ) {}
 
   intercept(
     req: HttpRequest<any>,
@@ -31,8 +36,9 @@ export class TokenInterceptor implements HttpInterceptor {
     const _req = req.clone({ setHeaders: headerConfig });
     return next.handle(_req).pipe(
       catchError(err => {
-        if (err.error != null && err.error.message != null) {
-          if (err.error.message === 'JWT_EXPIRED') {
+        if (err.error != null) {
+          if (err.error.status === 417) {
+            this.userService.setCurrentUserInfo(null);
             const title = 'Your Session has expired';
             const text = 'Please log in again !';
             const btn = 'Ok';

@@ -1,0 +1,27 @@
+<form (ngSubmit)="saveWithdrawal()" [formGroup]="withdrawalForm" novalidate>
+  <div class="dialog-content-wrapper">
+    <div matDialogTitle class="mat-accent m-0">
+      <h4>Withdraw Money</h4>
+    </div>
+
+    <mat-dialog-content fxLayout="column" class="mr-3">
+      <div fxLayout="column">
+        <mat-form-field fxFlex="100">
+          <input formControlName="withdrawal" type="number" matInput
+            placeholder="Enter amount to be withdrawn from your account." [(ngModel)]="withdraw.amount" required>
+          <mat-error *ngIf="getFormControls['withdrawal'].errors?.required">
+            Required
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions fxLayout="row" fxLayoutAlign="end center">
+      <button mat-flat-button color="warn" mat-dialog-close type="button" class="mr-2">Cancel</button>
+      <button mat-flat-button color="primary" type="submit" [disabled]="withdrawalForm.invalid || loading">Withdraw
+        Money
+        <mat-spinner [diameter]="20" *ngIf="loading"></mat-spinner>
+      </button>
+    </mat-dialog-actions>
+  </div>
+</form>
