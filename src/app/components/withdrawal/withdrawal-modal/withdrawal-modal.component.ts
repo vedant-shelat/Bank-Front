@@ -1,16 +1,16 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject } from "@angular/core";
 import {
   FormGroup,
   FormBuilder,
   Validators,
-  FormControl
-} from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { WithdrawalService } from 'src/app/services/withdrawal.service';
+  FormControl,
+} from "@angular/forms";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { WithdrawalService } from "src/app/services/withdrawal.service";
 
 @Component({
-  selector: 'app-withdrawal-modal',
-  templateUrl: './withdrawal-modal.component.html'
+  selector: "app-withdrawal-modal",
+  templateUrl: "./withdrawal-modal.component.html",
 })
 export class WithdrawalModalComponent implements OnInit {
   loading;
@@ -31,7 +31,7 @@ export class WithdrawalModalComponent implements OnInit {
       this.currentUserBalance = this.data.balance;
     }
     this.withdrawalForm = this.formBuilder.group({
-      withdrawal: new FormControl('', [Validators.required])
+      withdrawal: new FormControl("", [Validators.required]),
     });
   }
 
@@ -54,8 +54,8 @@ export class WithdrawalModalComponent implements OnInit {
     let withdarawalBalance = this.withdraw.amount;
     if (this.currentUserBalance - withdarawalBalance >= 0) {
       this.loading = true;
-      this.withdrawalService.saveWithdrawal(this.withdraw).subscribe(res => {
-        this.dialogRef.close('withdrawal saved');
+      this.withdrawalService.saveWithdrawal(this.withdraw).subscribe((res) => {
+        this.dialogRef.close("withdrawal saved");
         this.loading = false;
       });
     } else {
@@ -64,5 +64,9 @@ export class WithdrawalModalComponent implements OnInit {
     setTimeout(() => {
       this.cannotWithdrawMsg = false;
     }, 3500);
+  }
+
+  withdrawAllSavings() {
+    this.withdraw.amount = this.currentUserBalance;
   }
 }
