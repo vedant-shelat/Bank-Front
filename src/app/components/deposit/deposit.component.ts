@@ -17,6 +17,7 @@ export class DepositComponent implements OnInit {
   deposits = new MatTableDataSource([]);
   totalDeposits;
   currentUserBalance;
+  currentUserId;
   displayedColumns = ['date', 'amount'];
   pageEvent: PageEvent = {
     pageIndex: 0,
@@ -49,12 +50,15 @@ export class DepositComponent implements OnInit {
   getCurrentUser() {
     this.userService.getCurrentUser().subscribe((res: any) => {
       this.currentUserBalance = res.balance;
+      this.currentUserId = res.id;
     });
   }
 
   makeDeposit() {
     const config = _.cloneDeep(AppConstants.DIALOG_CONFIG.AVERAGE);
-    config.data = {};
+    config.data = {
+      userId: this.currentUserId
+    };
     let dialogRef = this.dialog.open(DepositModalComponent, config);
     dialogRef.afterClosed().subscribe(res => {
       if (res === 'deposit saved') {

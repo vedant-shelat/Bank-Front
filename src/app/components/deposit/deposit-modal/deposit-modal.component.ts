@@ -17,6 +17,7 @@ export class DepositModalComponent implements OnInit {
   depositForm: FormGroup;
   deposit: any = {};
   invalidAmount;
+  currentUserId;
   constructor(
     @Inject(MAT_DIALOG_DATA) private data,
     private formBuilder: FormBuilder,
@@ -25,6 +26,9 @@ export class DepositModalComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    if (this.data) {
+      this.currentUserId = this.data.userId;
+    }
     this.depositForm = this.formBuilder.group({
       deposit: new FormControl('', [Validators.required])
     });
@@ -41,6 +45,7 @@ export class DepositModalComponent implements OnInit {
   checkAmount() {
     if (this.deposit.amount > 0) {
       this.loading = true;
+      this.deposit.userId = this.currentUserId;
       this.depositService.saveDeposit(this.deposit).subscribe(res => {
         this.dialogRef.close('deposit saved');
         this.loading = false;

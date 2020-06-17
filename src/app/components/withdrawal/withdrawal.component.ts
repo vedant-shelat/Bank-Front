@@ -13,6 +13,7 @@ import { WithdrawalModalComponent } from './withdrawal-modal/withdrawal-modal.co
 })
 export class WithdrawalComponent implements OnInit {
   currentUserBalance;
+  currentUserId;
   withdrawnAddedMsg;
   totalWithdrawns;
   withdrawals = new MatTableDataSource([]);
@@ -47,12 +48,16 @@ export class WithdrawalComponent implements OnInit {
   getCurrentUser() {
     this.userService.getCurrentUser().subscribe((res: any) => {
       this.currentUserBalance = res.balance;
+      this.currentUserId = res.id;
     });
   }
 
   withdraw() {
     const config = _.cloneDeep(AppConstants.DIALOG_CONFIG.AVERAGE);
-    config.data = { balance: this.currentUserBalance };
+    config.data = {
+      balance: this.currentUserBalance,
+      userId: this.currentUserId
+    };
     let dialogRef = this.dialog.open(WithdrawalModalComponent, config);
     dialogRef.afterClosed().subscribe(res => {
       if (res === 'withdrawal saved') {

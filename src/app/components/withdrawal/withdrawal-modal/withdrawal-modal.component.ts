@@ -1,16 +1,16 @@
-import { Component, OnInit, Inject } from "@angular/core";
+import { Component, OnInit, Inject } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
   Validators,
-  FormControl,
-} from "@angular/forms";
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
-import { WithdrawalService } from "src/app/services/withdrawal.service";
+  FormControl
+} from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { WithdrawalService } from 'src/app/services/withdrawal.service';
 
 @Component({
-  selector: "app-withdrawal-modal",
-  templateUrl: "./withdrawal-modal.component.html",
+  selector: 'app-withdrawal-modal',
+  templateUrl: './withdrawal-modal.component.html'
 })
 export class WithdrawalModalComponent implements OnInit {
   loading;
@@ -18,6 +18,7 @@ export class WithdrawalModalComponent implements OnInit {
   withdraw: any = {};
   invalidAmount;
   currentUserBalance;
+  currentUserId;
   cannotWithdrawMsg;
   constructor(
     @Inject(MAT_DIALOG_DATA) private data,
@@ -29,9 +30,10 @@ export class WithdrawalModalComponent implements OnInit {
   ngOnInit() {
     if (this.data) {
       this.currentUserBalance = this.data.balance;
+      this.currentUserId = this.data.userId;
     }
     this.withdrawalForm = this.formBuilder.group({
-      withdrawal: new FormControl("", [Validators.required]),
+      withdrawal: new FormControl('', [Validators.required])
     });
   }
 
@@ -54,8 +56,9 @@ export class WithdrawalModalComponent implements OnInit {
     let withdarawalBalance = this.withdraw.amount;
     if (this.currentUserBalance - withdarawalBalance >= 0) {
       this.loading = true;
-      this.withdrawalService.saveWithdrawal(this.withdraw).subscribe((res) => {
-        this.dialogRef.close("withdrawal saved");
+      this.withdraw.userId = this.currentUserId;
+      this.withdrawalService.saveWithdrawal(this.withdraw).subscribe(res => {
+        this.dialogRef.close('withdrawal saved');
         this.loading = false;
       });
     } else {
